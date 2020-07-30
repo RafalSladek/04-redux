@@ -1,9 +1,19 @@
 import * as React from 'react';
+import { State } from "src/reducer";
+import { connect } from "react-redux";
 
-const Counter = (): JSX.Element => (
-    <div className="todo-footer">
-        <strong><span className="count-todos"/></strong> 2 movies left
+const Counter = (props: CounterProps): JSX.Element => (
+    <div data-testid="counter" className="todo-footer">
+        <strong><span  className="count-todos" />{props.count}</strong> movies left
     </div>
 );
 
-export default Counter;
+export interface CounterProps {
+    count: number
+}
+
+const mapStateToProps = (state: State): CounterProps => ({
+    count: state.movies.filter(movie => !movie.watched).length
+})
+
+export default connect(mapStateToProps)(Counter);

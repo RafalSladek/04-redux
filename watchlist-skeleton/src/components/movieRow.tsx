@@ -3,15 +3,17 @@ import * as React from 'react';
 export interface Movie {
     id: number,
     name: string,
-    onClick: (number: number) => void
+    watched: boolean,
+    onChange: (index: number) => void
 }
-const MovieRow = (props:Movie): JSX.Element => (
+const MovieRow = (props: Movie): JSX.Element => (
     <li className="ui-state-default">
         <div className="checkbox">
             <label>
                 <input
                     type="checkbox"
-                    onClick={() => props.onClick(props.id)} value=""
+                    checked={props.watched}
+                    onChange={() => props.onChange(props.id)}
                 />
                 {props.name}
             </label>
